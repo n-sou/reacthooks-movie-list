@@ -1,12 +1,11 @@
 import { MouseEventHandler } from "react"
 import styled from 'styled-components'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faXmark } from '@fortawesome/free-solid-svg-icons'
+import { faXmark, faLink } from '@fortawesome/free-solid-svg-icons'
 
 const MovieCard = styled.div`
     font: 14px/22px "Joan", Arial, sans-serif;
     color: #A9A8A3;
-    padding: 40px 0;
 `
 
 const Container = styled.div`
@@ -45,7 +44,7 @@ const Hero = styled.div<{ backdropImg?: string }>`
     }
 
     &:after{
-        background-color: rgba(0,0,0,0.6);
+        background-color: rgba(0,0,0,0.7);
         position: absolute;
         top: 0;
         right: 0;
@@ -58,30 +57,76 @@ const Hero = styled.div<{ backdropImg?: string }>`
     }
 `
 
-const Cover = styled.img`
+const CoverOverlay = styled.div`
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+    transition: .3s ease;
+    background-color: #1C1C1C;
+`
+
+const CoverWrapper = styled.div`
     position: absolute;
     width: 20%;
-    height: 50%;
+    height: 51%;
     top: 160px;
     left: 40px;
     z-index: 2;
+    cursor:pointer;
+
+    &:hover ${CoverOverlay} {
+        opacity: 0.6;
+    }
+`
+
+const Cover = styled.img`
+    display: block;
+    width: 100%;
+    height: auto;
+`
+
+const Link = styled.div`
+    color: #85f9ff;
+    font-size: 20px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    text-align: center;
 `
 
 const Details = styled.div`
-    padding: 20% 0 0 30%;
+    padding: 16% 0 0 30%;
 `
 
 const MainTitle = styled.div`
-    color: white;
+    color: #ffffff;
     font-size: 40px;
     position: relative;
     z-index: 1;
     line-height: 1.2em;
 `
 
+const TagLine = styled.div`
+    color: #979797;
+    font-size: 24px;
+    font-weight: 300;
+    margin-top: 8px;
+    line-height: 1.2em;
+    z-index: 1;
+    position: relative;
+`
+
 const Description = styled.div`
     bottom: 0px;
-    height: 200px;
+    height: auto;
     font-size: 16px;
     line-height: 26px;
     color: #B1B0AC;
@@ -109,7 +154,7 @@ const MovieTag = styled.span`
 
 const Column2 = styled.div`
     padding-left: 56px;
-    width: 480px;
+    width: 60%;
     float: left;
 `
 
@@ -117,7 +162,7 @@ const CloseButton = styled(FontAwesomeIcon)`
     color: #ffffff;
     font-size: 2.0em;
     position: absolute;
-    top: 48px;
+    top: 8px;
     right: 16px;
     z-index: 2;
     cursor: pointer;
@@ -126,15 +171,26 @@ const CloseButton = styled(FontAwesomeIcon)`
     }
 `
 
-export const MovieModal = ({ closeModal, title, genres, backdropImg, posterImg, overview }: { closeModal: MouseEventHandler, title?: string, genres?: { id: string, name: string }[], backdropImg?: string, posterImg?: string, overview?: string }) => {
+export const MovieModal = ({ closeModal, title, genres, backdropImg, posterImg, overview, tagLine, homePage }: { closeModal: MouseEventHandler, title?: string, genres?: { id: string, name: string }[], backdropImg?: string, posterImg?: string, overview?: string, tagLine?: string, homePage?: string }) => {
+    const onClickCover: MouseEventHandler = (e) => {
+        e.preventDefault()
+        window.open(homePage, '_blank', 'noopener')
+    }
+
     return (
         <MovieCard>
             <CloseButton icon={faXmark} onClick={closeModal} />
             <Container>
-                <Cover src={posterImg} />
+                <CoverWrapper onClick={onClickCover}>
+                    <Cover src={posterImg} />
+                    <CoverOverlay>
+                        <Link><FontAwesomeIcon icon={faLink} /></Link>
+                    </CoverOverlay>
+                </CoverWrapper>
                 <Hero backdropImg={backdropImg}>
                     <Details>
                         <MainTitle>{title}</MainTitle>
+                        <TagLine>{tagLine}</TagLine>
                     </Details>
                 </Hero>
                 <Description>

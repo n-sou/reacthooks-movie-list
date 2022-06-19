@@ -13,4 +13,5 @@ export type MovieDetail = {
     backdrop_path?: string;
     vote_average?: number;
     vote_count?: number;
+    tagline?: string;
 }

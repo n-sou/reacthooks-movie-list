@@ -8,8 +8,8 @@ import requests from '../apis/requests'
 import { instance } from '../apis/axios'
 import { MovieDetail } from '../types/MovieDetail'
 
-const hoverEasing = 'cubic-bezier(0.23, 1, 0.32, 1);'
-const returnEasing = 'cubic-bezier(0.445, 0.05, 0.55, 0.95);'
+const hoverEasing = 'cubic-bezier(0.23, 1, 0.32, 1)'
+const returnEasing = 'cubic-bezier(0.445, 0.05, 0.55, 0.95)'
 
 const CardBg = styled.div.attrs<{ backgroundImageUrl: string, tX: number, tY: number }>(({ backgroundImageUrl, tX, tY }) => ({
   style: {
@@ -38,7 +38,7 @@ const CardStyle = styled.div.attrs<{ rX: number, rY: number }>(({ rX, rY }) => (
 })) <{ rX: number, rY: number }>`
   position: relative;
   flex: 0 0 240px;
-  width: 280px;
+  width: 320px;
   height: 320px;
   background-color: #333;
   overflow: hidden;
@@ -142,7 +142,6 @@ export const MovieItem = memo(({ movieId, movieImg, movieName, voteCount, movieR
   useEffect(() => {
     setWidth(cardDom.current?.offsetWidth!)
     setHeight(cardDom.current?.offsetHeight!)
-    fetchMovieDetailById()
   }, [])
 
   const mousePX = () => mouseX / width
@@ -164,7 +163,6 @@ export const MovieItem = memo(({ movieId, movieImg, movieName, voteCount, movieR
   }
   const handleOnClick = async () => {
     await fetchMovieDetailById()
-    console.log(movieDetail)
     open()
   }
 
@@ -176,6 +174,7 @@ export const MovieItem = memo(({ movieId, movieImg, movieName, voteCount, movieR
   //GetMovieDetail By MovieId
   const fetchMovieDetailById = async () => {
     const request = await instance.get(`/movie/${movieId}${requests.fetchDetails}`)
+    console.log(request.data)
     setMovieDetail(request.data)
   }
 
@@ -200,6 +199,8 @@ export const MovieItem = memo(({ movieId, movieImg, movieName, voteCount, movieR
           backdropImg={`${imageBaseUrl}${movieDetail?.backdrop_path}`}
           posterImg={`${imageBaseUrl}${movieDetail?.poster_path}`}
           overview={movieDetail?.overview}
+          tagLine={movieDetail?.tagline}
+          homePage={movieDetail?.homepage}
           closeModal={close} />
       </Modal>
     </div>
