@@ -36,6 +36,7 @@ export const MovieList = ({ fetchUrl }: Props) => {
             {movies.map((movie, i) => (
                 <MovieItem
                     key={movie.id}
+                    movieId={movie.id}
                     movieImg={`${imageBaseUrl}${movie.backdrop_path}`}
                     movieName={movie.title}
                     voteCount={movie.vote_count}
