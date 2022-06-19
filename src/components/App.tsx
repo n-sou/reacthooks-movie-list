@@ -27,7 +27,7 @@ const PageTitle = styled.h1`
 function App() {
   return (
     <>
-      <PageTitle><span>Movie Trending</span></PageTitle>
+      <PageTitle><span>Trending Movies</span></PageTitle>
       <MovieList fetchUrl={requests.fetchTrending} />
     </>
   );
