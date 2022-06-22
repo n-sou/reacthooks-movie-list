@@ -1,12 +1,6 @@
-import React, { useState, useEffect } from 'react'
-import { instance } from '../apis/axios'
 import { Movie } from '../types/Movie'
 import { MovieItem } from './MovieItem'
 import styled from 'styled-components'
-
-type Props = {
-    fetchUrl: string;
-}
 
 const MovieListWrapper = styled.div`
     padding: 40px 80px;
@@ -15,25 +9,11 @@ const MovieListWrapper = styled.div`
     justify-content: center;
 `
 
-export const MovieList = ({ fetchUrl }: Props) => {
-    const [movies, setMovies] = useState<Movie[]>([]);
-
-    useEffect(() => {
-        async function fetchData() {
-            const request = await instance.get(fetchUrl);
-            setMovies(request.data.results);
-            return request;
-        }
-        fetchData();
-    }, [fetchUrl]);
-
-    console.log(movies);
-
+export const MovieList = ({ movieList }: { movieList: Movie[] }) => {
     const imageBaseUrl = 'https://image.tmdb.org/t/p/original/'
-
     return (
         <MovieListWrapper>
-            {movies.map((movie, i) => (
+            {movieList.map((movie: Movie) => (
                 <MovieItem
                     key={movie.id}
                     movieId={movie.id}
