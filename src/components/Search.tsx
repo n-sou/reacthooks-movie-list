@@ -42,7 +42,7 @@ const SearchButton = styled.button`
 export const Search = ({ searchEl, doSearch }: { searchEl: RefObject<HTMLInputElement>, doSearch: () => void }) => {
   return (
     <SearchWrapper>
-      <SearchInput ref={searchEl} type="text" />
+      <SearchInput ref={searchEl} type='text' placeholder='Enter movie title...' />
       <SearchButton onClick={doSearch}><FontAwesomeIcon icon={faMagnifyingGlass} /></SearchButton>
     </SearchWrapper>
   )
