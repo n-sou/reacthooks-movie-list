@@ -183,9 +183,9 @@ export const MovieModal = ({ closeModal, title, genres, backdropImg, posterImg, 
             <Container>
                 <CoverWrapper onClick={onClickCover}>
                     <Cover src={posterImg} />
-                    <CoverOverlay>
+                    {homePage !== '' && (<CoverOverlay>
                         <Link><FontAwesomeIcon icon={faLink} /></Link>
-                    </CoverOverlay>
+                    </CoverOverlay>)}
                 </CoverWrapper>
                 <Hero backdropImg={backdropImg}>
                     <Details>
