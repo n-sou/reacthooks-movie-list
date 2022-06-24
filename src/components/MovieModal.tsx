@@ -11,7 +11,6 @@ const MovieCard = styled.div`
 const Container = styled.div`
     margin: 0 auto;
     width: 50vw;
-    height: 60vh;
     background: #F0F0ED;
     border-radius: 5px;
     position: relative;
@@ -63,7 +62,6 @@ const CoverOverlay = styled.div`
     bottom: 0;
     left: 0;
     right: 0;
-    height: 100%;
     width: 100%;
     opacity: 0;
     transition: .3s ease;
@@ -73,12 +71,11 @@ const CoverOverlay = styled.div`
 const CoverWrapper = styled.div`
     position: absolute;
     width: 20%;
-    height: 51%;
     top: 160px;
     left: 40px;
     z-index: 2;
     cursor:pointer;
-
+    display: flex;
     &:hover ${CoverOverlay} {
         opacity: 0.6;
     }
@@ -103,7 +100,7 @@ const Link = styled.div`
 `
 
 const Details = styled.div`
-    padding: 16% 0 0 30%;
+    padding: 20% 0 10% 31%;
 `
 
 const MainTitle = styled.div`
@@ -135,7 +132,8 @@ const Description = styled.div`
 
 const Column1 = styled.div`
     padding-left: 28px;
-    padding-top: 120px;
+    padding-top: calc(2% + 90px);
+    margin-bottom: 5%;
     width: 220px;
     display: flex;
     justify-content: center;
@@ -148,6 +146,7 @@ const MovieTag = styled.span`
     padding: 0px 8px;
     font-size: 14px;
     margin-right: 4px;
+    margin-bottom: 4px;
     line-height: 35px;
     height: 32px;
 `
@@ -156,6 +155,7 @@ const Column2 = styled.div`
     padding-left: 56px;
     width: 60%;
     float: left;
+    margin-bottom: 2%;
 `
 
 const CloseButton = styled(FontAwesomeIcon)`
